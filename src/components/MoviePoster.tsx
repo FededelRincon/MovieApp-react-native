@@ -18,7 +18,7 @@ const MoviePoster = ({ movie }:Props) => {
         <View
             style={{
                 width: 300,
-                height: 400,
+                height: 420,
             }}
         >
             <View style={styles.imageContainer} >
