@@ -4,7 +4,12 @@ import { Image, StyleSheet, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { Movie } from '../interfaces/movieInterface';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParams } from '../navigation/Navigation';
 
+
+
+type HomeScreenNavigationProp = StackNavigationProp<RootStackParams, 'DetailScreen'>
 
 interface Props {
     movie: Movie;
@@ -17,7 +22,8 @@ const MoviePoster = ({ movie, height = 420, width = 300 }:Props) => {
 
     const uri = `https://image.tmdb.org/t/p/w500${ movie.poster_path }`;
 
-    const navigation = useNavigation();
+    const navigation = useNavigation<HomeScreenNavigationProp>()
+    // const navigation = useNavigation();
 
     return (
         <TouchableOpacity
