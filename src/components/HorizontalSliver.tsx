@@ -20,7 +20,7 @@ const HorizontalSliver = ({ title, movies }:Props) => {
             }}>
 
                 {
-                    title && (<Text style={{fontSize: 30, fontWeight: 'bold', marginLeft: 8}}>{title}</Text>)
+                    title && (<Text style={{fontSize: 30, fontWeight: 'bold', marginLeft: 8, color: 'black'}}>{title}</Text>)
                 }
 
                 <FlatList

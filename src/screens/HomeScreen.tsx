@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivityIndicator, Dimensions, FlatList, ScrollView, Text, View } from 'react-native';
+import { ActivityIndicator, Dimensions, ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import Carousel from 'react-native-snap-carousel';
@@ -14,7 +14,7 @@ const { width: windowWidth } = Dimensions.get('window')
 export const HomeScreen = () => {
     const {top} = useSafeAreaInsets(); //para los safe area, pero solo arriba
 
-    const { peliculasEnCine, isLoading } = useMovies();    
+    const { nowPlaying, popular, topRated, upcoming, isLoading } = useMovies();    
 
     if(isLoading) {
         return (
@@ -34,23 +34,23 @@ export const HomeScreen = () => {
                 {/* carrousel principal */}
                 <View style={{ height: 440 }} >
                     <Carousel 
-                        data={ peliculasEnCine }    //array de pelis
+                        data={ nowPlaying }    //array de pelis
                         renderItem={ ({ item }:any ) => <MoviePoster movie={ item } /> } //va una por una
                         sliderWidth={ windowWidth }
-                        itemWidth={ 300 }
+                        itemWidth={ 315 }
                         inactiveSlideOpacity = {0.9}
                     />
                 </View>
 
 
                 {/* Peliculas populares */}
-                <HorizontalSliver title="En cine" movies={ peliculasEnCine } />
+                <HorizontalSliver title="Popular" movies={ popular } />
 
-                {/* peliculas otra cosa */}
-                {/* <HorizontalSliver  movies={ peliculasEnCine } /> */}
+                {/* peliculas mejor puntuadas */}
+                <HorizontalSliver title="Top Rated" movies={ topRated } />
 
-                {/* peliculas 3er cosa */}
-                {/* <HorizontalSliver title="En cine 4" movies={ peliculasEnCine } /> */}
+                {/* peliculas por salir */}
+                <HorizontalSliver title="Upcoming" movies={ upcoming } />
             </View>
 
         </ScrollView>

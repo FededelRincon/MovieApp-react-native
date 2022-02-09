@@ -2,7 +2,6 @@ import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import { Movie } from '../interfaces/movieInterface';
 
-
 interface Props {
     movie: Movie;
     height?: number;
