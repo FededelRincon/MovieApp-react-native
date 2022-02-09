@@ -32,7 +32,9 @@ const MoviePoster = ({ movie, height = 420, width = 300 }:Props) => {
             style={{
                 width,
                 height,
-                marginHorizontal: 8,
+                marginHorizontal: 2,
+                paddingBottom: 20,
+                paddingHorizontal: 7,
             }}
         >
             <View style={styles.imageContainer} >
