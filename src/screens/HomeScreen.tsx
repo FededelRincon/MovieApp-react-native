@@ -1,10 +1,11 @@
 import React from 'react';
-import { ActivityIndicator, Dimensions, Text, View } from 'react-native';
+import { ActivityIndicator, Dimensions, FlatList, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import MoviePoster from '../components/MoviePoster';
 
 import Carousel from 'react-native-snap-carousel';
 
+import MoviePoster from '../components/MoviePoster';
+import HorizontalSliver from '../components/HorizontalSliver';
 import { useMovies } from '../hooks/useMovies';
 
 
@@ -27,18 +28,32 @@ export const HomeScreen = () => {
     }
 
     return (
-        <View style={{ marginTop: top + 20}}>
-            
-            <View style={{ height: 440 }} >
-                <Carousel 
-                    data={ peliculasEnCine }    //array de pelis
-                    renderItem={ ({ item }:any ) => <MoviePoster movie={ item } /> } //va una por una
-                    sliderWidth={ windowWidth }
-                    itemWidth={ 300 }
-                />
+        <ScrollView>
+            <View style={{ marginTop: top + 20}}>
+                
+                {/* carrousel principal */}
+                <View style={{ height: 440 }} >
+                    <Carousel 
+                        data={ peliculasEnCine }    //array de pelis
+                        renderItem={ ({ item }:any ) => <MoviePoster movie={ item } /> } //va una por una
+                        sliderWidth={ windowWidth }
+                        itemWidth={ 300 }
+                        inactiveSlideOpacity = {0.9}
+                    />
+                </View>
+
+
+                {/* Peliculas populares */}
+                <HorizontalSliver title="En cine" movies={ peliculasEnCine } />
+
+                {/* peliculas otra cosa */}
+                {/* <HorizontalSliver  movies={ peliculasEnCine } /> */}
+
+                {/* peliculas 3er cosa */}
+                {/* <HorizontalSliver title="En cine 4" movies={ peliculasEnCine } /> */}
             </View>
 
-        </View>
+        </ScrollView>
     )
 };
 
