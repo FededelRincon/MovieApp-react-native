@@ -1,8 +1,10 @@
 import React from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
 import { Dimensions, Image, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { RootStackParams } from '../navigation/Navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { RootStackParams } from '../navigation/Navigation';
+
+import { useMovieDetails } from '../hooks/useMovieDetails';
 
 const screenHeight = Dimensions.get('screen').height;
 
@@ -15,8 +17,9 @@ export const DetailScreen = ( { route }:Props ) => {
     const movie = route.params;
     const uri = `https://image.tmdb.org/t/p/w500${ movie.poster_path }`;
 
+    const { isLoading, movieFull, cast } = useMovieDetails( movie.id );
 
-
+    // console.log( {isLoading} )
     return (
         <ScrollView>
             <View style={styles.imageContainer}>
