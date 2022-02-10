@@ -1,11 +1,12 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { FlatList, Text, View } from 'react-native';
 import currencyFormatter from 'currency-formatter';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import { MovieFull } from '../interfaces/movieInterface';
 import { Cast } from '../interfaces/creditsInterface';
+import { CastItem } from './CastItem';
 
 
 interface Props {
@@ -38,7 +39,9 @@ export const MovieDetails = ({ movieFull, cast }: Props) => {
                     Historia
                 </Text>
                 <Text style={{fontSize: 15}}>
-                    {movieFull.overview}
+                    {movieFull.overview
+                    ? movieFull.overview
+                    : "No hay descripción" }
                 </Text>
 
                 {/* presupuesto */}
@@ -46,12 +49,32 @@ export const MovieDetails = ({ movieFull, cast }: Props) => {
                     Presupuesto
                 </Text>
                 <Text style={{ fontSize:18 }}>
-                    { currencyFormatter.format(movieFull.budget,{ code:'USD' })}
+                    {movieFull.budget
+                    ? ((currencyFormatter.format(movieFull.budget,{ code:'USD' }))) 
+                    : "No se dio a conocer el presupuesto" }
                 </Text>
 
             </View>
 
             {/* Casting */}
+            <View style={{ marginTop: 10, marginBottom: 100 }}>
+                <Text style={{ fontSize: 22, marginTop: 10, fontWeight: 'bold', marginHorizontal: 20, }}>
+                    Actores
+                </Text>
+
+                <FlatList 
+                    data={ cast }
+                    horizontal={true}
+                    keyExtractor={ (item) => item.id.toString() }
+                    renderItem={ ({ item }) => <CastItem actor={ item } /> }
+                    showsHorizontalScrollIndicator={false}
+                    style={{ marginTop: 10, height: 70}}
+                />
+                
+
+            </View>
+
+
         </>    
     )
 }

@@ -20,7 +20,7 @@ export const Navigation = () => {
             screenOptions={{
                 headerShown: false,      //para no mostrar el header
                 cardStyle: {
-                    backgroundColor: 'white',   //fondo del card en blanco
+                    // backgroundColor: 'white',   //fondo del card en blanco
                 }
             }}
         >
