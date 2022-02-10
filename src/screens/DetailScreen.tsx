@@ -5,6 +5,8 @@ import { RootStackParams } from '../navigation/Navigation';
 
 import { useMovieDetails } from '../hooks/useMovieDetails';
 import { MovieDetails } from '../components/MovieDetails';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const screenHeight = Dimensions.get('screen').height;
 
@@ -12,7 +14,7 @@ const screenHeight = Dimensions.get('screen').height;
 interface Props extends StackScreenProps<RootStackParams, 'DetailScreen'>{}
 
 
-export const DetailScreen = ( { route }:Props ) => {
+export const DetailScreen = ( { route, navigation }:Props ) => {
 
     const movie = route.params;
     const uri = `https://image.tmdb.org/t/p/w500${ movie.poster_path }`;
@@ -43,6 +45,23 @@ export const DetailScreen = ( { route }:Props ) => {
                         ? <ActivityIndicator  size={35} color="grey" style={{ marginTop: 20, }} />
                         : <MovieDetails movieFull={movieFull!} cast={cast} />
                 }
+
+                {/* Boton para volver */}
+                <View
+                    style={styles.backButton}
+                >
+                    <TouchableOpacity
+                        onPress={() => navigation.pop()}
+                    >
+                        <Icon
+                            color="black"
+                            name="arrow-back-outline"
+                            size={70}
+                        />
+                    </TouchableOpacity>
+                </View>
+
+
             </View>
 
         </ScrollView>
@@ -90,5 +109,12 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 20,
         fontWeight: 'bold'
+    },
+    backButton: {
+        position: 'absolute',
+        zIndex: 999,
+        elevation: 9,
+        top: -500,
+        left: 5,
     }
 });
