@@ -7,6 +7,7 @@ import Carousel from 'react-native-snap-carousel';
 import MoviePoster from '../components/MoviePoster';
 import HorizontalSliver from '../components/HorizontalSliver';
 import { useMovies } from '../hooks/useMovies';
+import { GradientBackground } from '../components/GradientBackground';
 
 
 const { width: windowWidth } = Dimensions.get('window')
@@ -28,32 +29,34 @@ export const HomeScreen = () => {
     }
 
     return (
-        <ScrollView>
-            <View style={{ marginTop: top + 20}}>
-                
-                {/* carrousel principal */}
-                <View style={{ height: 440 }} >
-                    <Carousel 
-                        data={ nowPlaying }    //array de pelis
-                        renderItem={ ({ item }:any ) => <MoviePoster movie={ item } /> } //va una por una
-                        sliderWidth={ windowWidth }
-                        itemWidth={ 315 }
-                        inactiveSlideOpacity = {0.9}
-                    />
+        <GradientBackground >
+            <ScrollView>
+                <View style={{ marginTop: top + 20}}>
+                    
+                    {/* carrousel principal */}
+                    <View style={{ height: 440 }} >
+                        <Carousel 
+                            data={ nowPlaying }    //array de pelis
+                            renderItem={ ({ item }:any ) => <MoviePoster movie={ item } /> } //va una por una
+                            sliderWidth={ windowWidth }
+                            itemWidth={ 315 }
+                            inactiveSlideOpacity = {0.9}
+                        />
+                    </View>
+
+
+                    {/* Peliculas populares */}
+                    <HorizontalSliver title="Popular" movies={ popular } />
+
+                    {/* peliculas mejor puntuadas */}
+                    <HorizontalSliver title="Top Rated" movies={ topRated } />
+
+                    {/* peliculas por salir */}
+                    <HorizontalSliver title="Upcoming" movies={ upcoming } />
                 </View>
 
-
-                {/* Peliculas populares */}
-                <HorizontalSliver title="Popular" movies={ popular } />
-
-                {/* peliculas mejor puntuadas */}
-                <HorizontalSliver title="Top Rated" movies={ topRated } />
-
-                {/* peliculas por salir */}
-                <HorizontalSliver title="Upcoming" movies={ upcoming } />
-            </View>
-
-        </ScrollView>
+            </ScrollView>
+        </GradientBackground>
     )
 };
 
